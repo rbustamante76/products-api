@@ -10,12 +10,14 @@ router.get('/:id', async ctx => {
       ctx.body = response
     }else {
       ctx.status = 204
-      ctx. body = bodyResponseBuild(ctx.status, 'Product whit id '+id+' not Found')
+      const message = 'Product whit id '+id+' not Found'
+      console.log(message)
+      ctx.body = bodyResponseBuild(ctx.status, message)
     }
     console.log(ctx.status)
       }catch(error){
         ctx.status = 500
-        ctx. body = ctx. body = bodyResponseBuild(ctx.status, error.message)
+        ctx.body = bodyResponseBuild(ctx.status, error.message)
     }
   })
 
@@ -28,12 +30,12 @@ router.get('/:id', async ctx => {
         ctx.body = response
       }else {
         ctx.status = 204
-        ctx. body = bodyResponseBuild(ctx.status, 'Products with contains ' +brand+ ' in brand not fround')
+        ctx.body = bodyResponseBuild(ctx.status, 'Products with contains ' +brand+ ' in brand not fround')
       }
       console.log(ctx.status)
         }catch(error){
           ctx.status = 500
-          ctx. body = bodyResponseBuild(ctx.status, error.message)
+          ctx.body = bodyResponseBuild(ctx.status, error.message)
       }
     })
 
