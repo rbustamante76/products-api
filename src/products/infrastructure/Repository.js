@@ -1,4 +1,4 @@
-const ProductModel  = require('../../models/products');
+const ProductModel  = require('../entities/product.model');
 
 exports.findById = async id => { 
   try{

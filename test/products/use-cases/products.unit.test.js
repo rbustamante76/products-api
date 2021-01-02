@@ -1,5 +1,5 @@
-const productsRepository = require('../../../src/api/products/productsRepository')
-const productsController = require('../../../src/api/products/productsController')
+const Repository = require('../../../src/products/infrastructure/Repository')
+const ProductUseCases = require('../../../src/products/use-cases/product')
 const sinon = require('sinon')
 
 describe('Test products by id controller', () => {
@@ -18,8 +18,8 @@ describe('Test products by id controller', () => {
       price: 20000
     }
 
-    sinon.stub(productsRepository, 'findById').returns(expected)
-    const result = await productsController.findById('4')
+    sinon.stub(Repository, 'findById').returns(expected)
+    const result = await ProductUseCases.findById('4')
     console.log(result)
     expect(result).toEqual(expected)
 
@@ -27,8 +27,8 @@ describe('Test products by id controller', () => {
 
   test('should return undefined when product not exist', async()  => {
 
-    sinon.stub(productsRepository, 'findById').returns(null)
-    const result = await productsController.findById('1000')
+    sinon.stub(Repository, 'findById').returns(null)
+    const result = await ProductUseCases.findById('1000')
 
     expect(result).toEqual(null)
 
@@ -36,7 +36,7 @@ describe('Test products by id controller', () => {
 
   test('should return udefined when id is invalid', async()  => {
 
-   await expect(productsController.findById('x')).rejects.toThrow()
+   await expect(ProductUseCases.findById('x')).rejects.toThrow()
 
   })
 
@@ -67,8 +67,8 @@ describe('Test products by brand controller', () => {
    }
    ]
 
-    sinon.stub(productsRepository, 'findByBrand').returns(expected)
-    const result = await productsController.findByBrand('Marca')
+    sinon.stub(Repository, 'findByBrand').returns(expected)
+    const result = await ProductUseCases.findByBrand('Marca')
     console.log(result)
     expect(result).toEqual(expected)
 
@@ -76,8 +76,8 @@ describe('Test products by brand controller', () => {
 
   test('should return null when neithert product contains brand', async()  => {
 
-    sinon.stub(productsRepository, 'findByBrand').returns(null)
-    const result = await productsController.findByBrand('xxx')
+    sinon.stub(Repository, 'findByBrand').returns(null)
+    const result = await ProductUseCases.findByBrand('xxx')
 
     expect(result).toEqual(null)
 

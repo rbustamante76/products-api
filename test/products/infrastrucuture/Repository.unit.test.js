@@ -1,4 +1,4 @@
-const productsRepository = require('../../../src/api/products/productsRepository')
+const Repository = require('../../../src/products/infrastructure/Repository')
 const sinon = require('sinon')
 
 describe('Test products by id repository', () => {
@@ -17,8 +17,8 @@ describe('Test products by id repository', () => {
       price: 20000
     }
 
-    sinon.stub(productsRepository, 'findById').returns(expected)
-    const result = await productsRepository.findById('4')
+    sinon.stub(Repository, 'findById').returns(expected)
+    const result = await Repository.findById('4')
     console.log(result)
     expect(result).toEqual(expected)
 
@@ -26,15 +26,15 @@ describe('Test products by id repository', () => {
 
   test('should return undefined when product not exist', async()  => {
 
-    sinon.stub(productsRepository, 'findById').returns(null)
-    const result = await productsRepository.findById('1000')
+    sinon.stub(Repository, 'findById').returns(null)
+    const result = await Repository.findById('1000')
 
     expect(result).toEqual(null)
 
   })
 
   test('should return error when id is invalid', async()  => {
-   await expect(productsRepository.findById('x')).rejects.toThrow()
+   await expect(Repository.findById('x')).rejects.toThrow()
 
   })
 
@@ -65,8 +65,8 @@ describe('Test products by brand repository', () => {
    }
    ]
 
-    sinon.stub(productsRepository, 'findByBrand').returns(expected)
-    const result = await productsRepository.findByBrand('Marca')
+    sinon.stub(Repository, 'findByBrand').returns(expected)
+    const result = await Repository.findByBrand('Marca')
     console.log(result)
     expect(result).toEqual(expected)
 
@@ -74,8 +74,8 @@ describe('Test products by brand repository', () => {
 
   test('should return null when neither product contains a brand', async()  => {
 
-    sinon.stub(productsRepository, 'findByBrand').returns(null)
-    const result = await productsRepository.findByBrand('xxx')
+    sinon.stub(Repository, 'findByBrand').returns(null)
+    const result = await Repository.findByBrand('xxx')
 
     expect(result).toEqual(null)
 
