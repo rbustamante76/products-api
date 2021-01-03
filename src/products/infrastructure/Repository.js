@@ -16,3 +16,12 @@ exports.findByBrand = async brand => {
     throw new Error(error)
   }
 }
+
+exports.findByDescription = async description => {
+  try{
+    const filter = `.*${description}.*`
+    return await ProductModel.find({'description':{$regex : filter,'$options' : 'i' }})
+  }catch(error){
+    throw new Error(error)
+  }
+}

@@ -5,6 +5,10 @@ const ProductUseCases = require('../../../src/products/use-cases/product')
 
 describe('routes:  get products by id', () => {
 
+  beforeEach(() => {
+    jest.useFakeTimers()
+   });
+   
    afterEach(() => {
     sinon.restore()
    });
@@ -38,11 +42,19 @@ describe('routes:  get products by id', () => {
 
   })
 
-    test('should respond error get product by id  when id product is not numeric', async () => {
+    test('should respond bad request get product by id  when product id is not numeric', async () => {
 
         const response = await request(app.callback()).get('/products/x')
 
-        expect(response.status).toBe(500)
+        expect(response.status).toBe(400)
 
     })
+
+    test('should respond not found request get product by id  when product id is empty', async () => {
+
+      const response = await request(app.callback()).get('/products/x')
+
+      expect(response.status).toBe(400)
+
+  })
 })

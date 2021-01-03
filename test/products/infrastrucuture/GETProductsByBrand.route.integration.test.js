@@ -5,6 +5,10 @@ const ProductUseCases = require('../../../src/products/use-cases/product')
 
 describe('routes:  get products by brand', () => {
 
+  beforeEach(() => {
+    jest.useFakeTimers()
+   });
+   
   afterEach(() => {
    sinon.restore()
   });
@@ -39,11 +43,11 @@ describe('routes:  get products by brand', () => {
 
  test('should respond not found get product by brand ', async () => {
 
-     sinon.stub(ProductUseCases, 'findByBrand').returns(null)
+     sinon.stub(ProductUseCases, 'findByBrand').returns([])
 
      const response = await request(app.callback()).get('/products/brand/Marca')
 
-     expect(response.status).toBe(204)
+     expect(response.status).toBe(200)
 
  })
 

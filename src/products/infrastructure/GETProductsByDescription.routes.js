@@ -1,24 +1,24 @@
 const ProductUseCases = require('../use-cases/product');
-const { validateQuery } = require('../adapters/GETProductsByBrand.validators')
+const { validateQuery } = require('../adapters/GETProductsByDescription.validators')
 const HTTPCodes = require('http-status-codes');
 
 const GetProductsByBrand = {
   method: 'GET',
-  route: '/products/brand/:brand',
+  route: '/products/description/:description',
   action,
 }
 
 async function action(ctx) {
   try {
-    const { brand } = ctx.params
-    const validation = validateQuery({ brand });
+    const { description } = ctx.params
+    const validation = validateQuery({ description });
     
     if (validation.error) {
       setHttpResponse(ctx, { error: validation.error }, HTTPCodes.BAD_REQUEST);
       return;
     }
 
-    const response = await ProductUseCases.findByBrand(brand) 
+    const response = await ProductUseCases.findByDescription(description) 
     ctx.body = response
     setHttpResponse(ctx, response, HTTPCodes.OK);
   

@@ -2,7 +2,11 @@ const Repository = require('../../../src/products/infrastructure/Repository')
 const ProductUseCases = require('../../../src/products/use-cases/product')
 const sinon = require('sinon')
 
-describe('Test products by id controller', () => {
+describe('Test products by id use cases', () => {
+
+  beforeEach(() => {
+    jest.useFakeTimers()
+   });
 
   afterEach(async () => {
     sinon.restore()
@@ -20,7 +24,7 @@ describe('Test products by id controller', () => {
 
     sinon.stub(Repository, 'findById').returns(expected)
     const result = await ProductUseCases.findById('4')
-    console.log(result)
+
     expect(result).toEqual(expected)
 
   })
@@ -34,7 +38,7 @@ describe('Test products by id controller', () => {
 
   })
 
-  test('should return udefined when id is invalid', async()  => {
+ test('should return udefined when id is invalid', async()  => {
 
    await expect(ProductUseCases.findById('x')).rejects.toThrow()
 
@@ -42,7 +46,11 @@ describe('Test products by id controller', () => {
 
 })
 
-describe('Test products by brand controller', () => {
+describe('Test products by brand use cases', () => {
+
+  beforeEach(() => {
+    jest.useFakeTimers()
+   });
 
   afterEach(async () => {
     sinon.restore()
@@ -69,17 +77,56 @@ describe('Test products by brand controller', () => {
 
     sinon.stub(Repository, 'findByBrand').returns(expected)
     const result = await ProductUseCases.findByBrand('Marca')
-    console.log(result)
+    
     expect(result).toEqual(expected)
 
   })
 
   test('should return null when neithert product contains brand', async()  => {
 
-    sinon.stub(Repository, 'findByBrand').returns(null)
+    sinon.stub(Repository, 'findByBrand').returns([])
     const result = await ProductUseCases.findByBrand('xxx')
 
-    expect(result).toEqual(null)
+    expect(result).toEqual([])
+
+  })
+
+})
+
+describe('Test products by description use cases', () => {
+
+  beforeEach(() => {
+    jest.useFakeTimers()
+   });
+   
+  afterEach(async () => {
+    sinon.restore()
+  })
+
+  test('should return a products by description', async()  => {
+    const expected = [{
+      _id:'5fe7a9f5bfeda8b21a8e74cb',
+      id: 4,
+      brand: 'Marca2',
+      description: 'Refrigerador',
+      image: 'www.lider.cl/catalogo/images/catalogo_no_photo.jpg',
+      price: 20000
+    }
+   ]
+
+    sinon.stub(Repository, 'findByDescription').returns(expected)
+    const result = await ProductUseCases.findByDescription('Refri')
+    
+    expect(result).toEqual(expected)
+
+  })
+
+  test('should return null when neithert product contains description', async()  => {
+
+    sinon.stub(Repository, 'findByDescription').returns([])
+    const result = await ProductUseCases.findByDescription('xxx')
+
+    expect(result).toEqual([])
 
   })
 

@@ -8,3 +8,8 @@ exports.findByBrand = async brand => {
   
  return await Repository.findByBrand(brand)
 }
+
+exports.findByDescription = async description => {
+  
+  return await Repository.findByDescription(description)
+ }
