@@ -4,7 +4,7 @@
   "description": "Api rest",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --config jest.config.js --runInBand --forceExit",
+    "test": "jest --detectOpenHandles --coverage --config jest.config.js --runInBand --forceExit",
     "start": "node src/server"
   },
   "author": "",

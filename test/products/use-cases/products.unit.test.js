@@ -4,10 +4,6 @@ const sinon = require('sinon')
 
 describe('Test products by id use cases', () => {
 
-  beforeEach(() => {
-    jest.useFakeTimers()
-   });
-
   afterEach(async () => {
     sinon.restore()
   })
@@ -47,10 +43,6 @@ describe('Test products by id use cases', () => {
 })
 
 describe('Test products by brand use cases', () => {
-
-  beforeEach(() => {
-    jest.useFakeTimers()
-   });
 
   afterEach(async () => {
     sinon.restore()
@@ -95,10 +87,6 @@ describe('Test products by brand use cases', () => {
 
 describe('Test products by description use cases', () => {
 
-  beforeEach(() => {
-    jest.useFakeTimers()
-   });
-   
   afterEach(async () => {
     sinon.restore()
   })

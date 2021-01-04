@@ -3,9 +3,6 @@ const ProductModel  = require('../../../src/products/entities/product.model');
 const sinon = require('sinon')
 
 describe('Test products by id repository', () => {
-  beforeEach(() => {
-    jest.useFakeTimers()
-   });
 
   afterEach(async () => {
     sinon.restore()
@@ -45,10 +42,6 @@ describe('Test products by id repository', () => {
 })
 
 describe('Test products by brand repository', () => {
-
-  beforeEach(() => {
-    jest.useFakeTimers()
-   });
 
   afterEach(async () => {
     sinon.restore()
@@ -92,9 +85,7 @@ describe('Test products by brand repository', () => {
 })
 
 describe('Test products by description repository', () => {
-    beforeEach(() => {
-    jest.useFakeTimers()
-   });
+  
 
     afterEach(async () => {
         sinon.restore()

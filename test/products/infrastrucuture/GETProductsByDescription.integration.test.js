@@ -5,10 +5,6 @@ const ProductUseCases = require('../../../src/products/use-cases/product')
 
 describe('routes:  get products by description', () => {
 
-  beforeEach(() => {
-    jest.useFakeTimers()
-   });
-   
   afterEach(() => {
    sinon.restore()
   });
