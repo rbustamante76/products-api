@@ -8,4 +8,6 @@ RUN npm install
 
 COPY src /usr/app/src
 
-CMD npm run start
+EXPOSE $PORT
+
+CMD npm start
