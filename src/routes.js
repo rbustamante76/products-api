@@ -1,6 +1,6 @@
 const GetProductById = require('../src/products/infrastructure/GETProductById.routes') 
-const GetProductsByBrand = require('../src/products/infrastructure/GetProductsByBrand.routes')
-const GetProductsByDescription = require('../src/products/infrastructure/GetProductsByDescription.routes') 
+const GetProductsByBrand = require('../src/products/infrastructure/GETProductsByBrand.routes')
+const GetProductsByDescription = require('../src/products/infrastructure/GETProductsByDescription.routes') 
 const Router = require('koa-router')
 
 const router = new Router()
