@@ -19,7 +19,6 @@ async function action(ctx) {
     }
 
     const response = await ProductUseCases.findByDescription(description) 
-    ctx.body = response
     setHttpResponse(ctx, response, HTTPCodes.OK);
   
       }catch(error){

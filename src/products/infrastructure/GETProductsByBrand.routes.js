@@ -19,7 +19,6 @@ async function action(ctx) {
     }
 
     const response = await ProductUseCases.findByBrand(brand) 
-    ctx.body = response
     setHttpResponse(ctx, response, HTTPCodes.OK);
   
       }catch(error){

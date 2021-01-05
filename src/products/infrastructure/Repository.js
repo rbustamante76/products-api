@@ -25,3 +25,11 @@ exports.findByDescription = async description => {
     throw new Error(error)
   }
 }
+
+exports.findAll = async () => { 
+  try{
+    return await ProductModel.find()
+  }catch(error){
+    throw new Error(error)
+  }
+}

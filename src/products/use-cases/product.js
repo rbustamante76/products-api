@@ -13,3 +13,8 @@ exports.findByDescription = async description => {
   
   return await Repository.findByDescription(description)
  }
+
+ exports.findAll = async () => {
+  
+  return await Repository.findAll()
+ }

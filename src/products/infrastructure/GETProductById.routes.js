@@ -10,6 +10,8 @@ const GetProductById = {
 
 async function action(ctx) {
   try {
+
+    let body = {}
     const { id } = ctx.params
 
     const validation = validateQuery({ id });
@@ -19,17 +21,9 @@ async function action(ctx) {
     }
     const response = await ProductUseCases.findById(id)
     if (response){
-      ctx.body = response
-      setHttpResponse(ctx, response, HTTPCodes.OK);
-    }else {
-      const message = 'Product whit id '+id+' not Found'
-      const  body = {
-        codeStatus: HTTPCodes.NO_CONTENT,
-        message
-      }
-      setHttpResponse(ctx, body, HTTPCodes.NO_CONTENT);
+      body = response
     }
-    console.log(ctx.status)
+    setHttpResponse(ctx, body, HTTPCodes.OK);
       }catch(error){
         ctx.throw(
           HTTPCodes.INTERNAL_SERVER_ERROR,
