@@ -1,6 +1,23 @@
+const mongoose = require('mongoose');
+const { MongoMemoryServer } = require('mongodb-memory-server');
 const Repository = require('../../../src/products/infrastructure/Repository')
 const ProductUseCases = require('../../../src/products/use-cases/product')
 const sinon = require('sinon')
+
+let mongoServer;
+const opts = { useUnifiedTopology: true, useNewUrlParser: true };
+beforeAll(async () => {
+mongoServer = new MongoMemoryServer();
+const mongoUri = await mongoServer.getUri();
+await mongoose.connect(mongoUri, opts, (err) => {
+if (err) console.error(err);
+});
+
+});
+afterAll(async () => {
+await mongoose.disconnect();
+await mongoServer.stop();
+});
 
 describe('Test products by id use cases', () => {
 
@@ -69,7 +86,7 @@ describe('Test products by brand use cases', () => {
 
     sinon.stub(Repository, 'findByBrand').returns(expected)
     const result = await ProductUseCases.findByBrand('Marca')
-    
+
     expect(result).toEqual(expected)
 
   })
@@ -104,7 +121,7 @@ describe('Test products by description use cases', () => {
 
     sinon.stub(Repository, 'findByDescription').returns(expected)
     const result = await ProductUseCases.findByDescription('Refri')
-    
+
     expect(result).toEqual(expected)
 
   })

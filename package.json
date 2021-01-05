@@ -17,6 +17,7 @@
     "koa-bodyparser": "4.3.0",
     "koa-router": "10.0.0",
     "method-override": "3.0.0",
+    "mongodb-memory-server": "^6.9.2",
     "mongoose": "5.11.8",
     "sinon": "9.2.2",
     "supertest": "6.0.1"

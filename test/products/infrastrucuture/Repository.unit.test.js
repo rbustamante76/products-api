@@ -1,6 +1,23 @@
+const mongoose = require('mongoose');
+const { MongoMemoryServer } = require('mongodb-memory-server');
 const Repository = require('../../../src/products/infrastructure/Repository')
 const ProductModel  = require('../../../src/products/entities/product.model');
 const sinon = require('sinon')
+
+let mongoServer;
+const opts = { useUnifiedTopology: true, useNewUrlParser: true };
+beforeAll(async () => {
+mongoServer = new MongoMemoryServer();
+const mongoUri = await mongoServer.getUri();
+await mongoose.connect(mongoUri, opts, (err) => {
+if (err) console.error(err);
+});
+
+});
+afterAll(async () => {
+await mongoose.disconnect();
+await mongoServer.stop();
+});
 
 describe('Test products by id repository', () => {
 
@@ -20,7 +37,7 @@ describe('Test products by id repository', () => {
 
     sinon.stub(ProductModel, 'findOne').returns(expected)
     const result = await Repository.findById('4')
-    
+
     expect(result).toEqual(expected)
 
   })
@@ -68,7 +85,7 @@ describe('Test products by brand repository', () => {
 
     sinon.stub(ProductModel, 'find').returns(expected)
     const result = await Repository.findByBrand('Marca')
-    
+
     expect(result).toEqual(expected)
 
   })
@@ -85,7 +102,7 @@ describe('Test products by brand repository', () => {
 })
 
 describe('Test products by description repository', () => {
-  
+
 
     afterEach(async () => {
         sinon.restore()
@@ -112,7 +129,7 @@ describe('Test products by description repository', () => {
 
         sinon.stub(ProductModel, 'find').returns(expected)
         const result = await Repository.findByDescription('Marca')
-        
+
         expect(result).toEqual(expected)
 
     })

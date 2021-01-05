@@ -35,13 +35,14 @@ describe('routes:  get products by brand', () => {
 
   expect(response.status).toBe(200)
 
+
  })
 
  test('should respond not found get product by brand ', async () => {
 
      sinon.stub(ProductUseCases, 'findByBrand').returns([])
 
-     const response = await request(app.callback()).get('/products/brand/Marca')
+     const response = await request(app.callback()).get('/products/brand/xxx')
 
      expect(response.status).toBe(200)
 
