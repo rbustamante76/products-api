@@ -1,4 +1,3 @@
-const { MongoMemoryServer } = require('mongodb-memory-server');
 const app = require('../../../src/app')
 const request = require('supertest')
 const sinon = require('sinon')
@@ -47,11 +46,4 @@ describe('routes:  get products by id', () => {
 
     })
 
-    test('should respond not found request get product by id  when product id is empty', async () => {
-
-      const response = await request(app.callback()).get('/products/')
-
-      expect(response.status).toBe(404)
-
-  })
 })

@@ -91,7 +91,7 @@ describe('Test products by brand use cases', () => {
 
   })
 
-  test('should return null when neithert product contains brand', async()  => {
+  test('should return empty when neithert product contains brand', async()  => {
 
     sinon.stub(Repository, 'findByBrand').returns([])
     const result = await ProductUseCases.findByBrand('xxx')
@@ -132,6 +132,40 @@ describe('Test products by description use cases', () => {
     const result = await ProductUseCases.findByDescription('xxx')
 
     expect(result).toEqual([])
+
+  })
+
+})
+
+describe('Test get products use cases', () => {
+
+  afterEach(async () => {
+    sinon.restore()
+  })
+
+  test('should return all products', async()  => {
+    const expected = [{
+      _id:'5fe7a9f5bfeda8b21a8e74cb',
+      id: 4,
+      brand: 'Marca2',
+      description: 'Refrigerador',
+      image: 'www.lider.cl/catalogo/images/catalogo_no_photo.jpg',
+      price: 20000
+    },
+    {
+     _id:'5fe7a9f5bfeda8b21a8e74c9',
+     id: 3,
+     brand: 'Marca1',
+     description: 'Horno Gas Premium',
+     image: 'www.lider.cl/catalogo/images/catalogo_no_photo.jpg',
+     price: 30000
+   }
+   ]
+
+    sinon.stub(Repository, 'findAll').returns(expected)
+    const result = await ProductUseCases.findAll()
+
+    expect(result).toEqual(expected)
 
   })
 

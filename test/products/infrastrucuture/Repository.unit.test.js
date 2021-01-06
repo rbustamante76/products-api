@@ -144,3 +144,36 @@ describe('Test products by description repository', () => {
     })
 
 })
+
+describe('Test get all products repository', () => {
+
+  afterEach(async () => {
+    sinon.restore()
+  })
+
+  test('should return all products', async()  => {
+    const expected = [{
+      _id:'5fe7a9f5bfeda8b21a8e74cb',
+      id: 4,
+      brand: 'Marca2',
+      description: 'Refrigerador',
+      image: 'www.lider.cl/catalogo/images/catalogo_no_photo.jpg',
+      price: 20000
+    },
+    {
+     _id:'5fe7a9f5bfeda8b21a8e74c9',
+     id: 3,
+     brand: 'Marca1',
+     description: 'Horno Gas Premium',
+     image: 'www.lider.cl/catalogo/images/catalogo_no_photo.jpg',
+     price: 30000
+   }
+   ]
+
+    sinon.stub(ProductModel, 'find').returns(expected)
+    const result = await Repository.findAll('Marca')
+
+    expect(result).toEqual(expected)
+
+  })
+})  
