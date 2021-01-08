@@ -33,3 +33,11 @@ exports.findAll = async () => {
     throw new Error(error)
   }
 }
+
+exports.create = async (product) =>{
+  try{
+    return await ProductModel.create(product)
+  }catch(error){
+    throw new Error(error)
+  }
+} 
