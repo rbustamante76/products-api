@@ -20,7 +20,7 @@ describe('routes:  get products by id', () => {
       price: 20000
     }
 
-    sinon.stub(ProductUseCases, 'searchProductById').returns(mockResult)
+    sinon.stub(ProductUseCases, 'getProductById').returns(mockResult)
 
     const response = await request(app.callback()).get('/products/4')
 
@@ -30,7 +30,7 @@ describe('routes:  get products by id', () => {
 
   test('should respond not found get product by id ', async () => {
 
-      sinon.stub(ProductUseCases, 'searchProductById').returns(null)
+      sinon.stub(ProductUseCases, 'getProductById').returns(null)
 
       const response = await request(app.callback()).get('/products/3000')
 

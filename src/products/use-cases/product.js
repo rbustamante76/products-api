@@ -1,6 +1,6 @@
 const ProductRepository = require('../infrastructure/ProductRepository')
 
-exports.searchProductById = async id => { 
+exports.getProductById = async id => { 
   return await ProductRepository.findById(id)
 }
 

@@ -36,7 +36,7 @@ describe('Test products by id use cases', () => {
     }
 
     sinon.stub(ProductRepository, 'findById').returns(expected)
-    const result = await ProductUseCases.searchProductById('4')
+    const result = await ProductUseCases.getProductById('4')
 
     expect(result).toEqual(expected)
 
@@ -45,7 +45,7 @@ describe('Test products by id use cases', () => {
   test('should return undefined when product not exist', async()  => {
 
     sinon.stub(ProductRepository, 'findById').returns(null)
-    const result = await ProductUseCases.searchProductById('1000')
+    const result = await ProductUseCases.getProductById('1000')
 
     expect(result).toEqual(null)
 
@@ -53,7 +53,7 @@ describe('Test products by id use cases', () => {
 
  test('should return udefined when id is invalid', async()  => {
 
-   await expect(ProductUseCases.searchProductById('x')).rejects.toThrow()
+   await expect(ProductUseCases.getProductById('x')).rejects.toThrow()
 
   })
 
