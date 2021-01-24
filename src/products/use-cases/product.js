@@ -1,21 +1,21 @@
-const Repository = require('../infrastructure/Repository')
+const ProductRepository = require('../infrastructure/ProductRepository')
 
-exports.findById = async id => { 
-  return await Repository.findById(id)
+exports.searchProductById = async id => { 
+  return await ProductRepository.findById(id)
 }
 
-exports.findByBrand = async brand => {
-  return await Repository.findByBrand(brand)
+exports.searchProductsByBrand = async brand => {
+  return await ProductRepository.findByBrand(brand)
 }
 
-exports.findByDescription = async description => {
-  return await Repository.findByDescription(description)
+exports.searchProductsByDescription = async description => {
+  return await ProductRepository.findByDescription(description)
  }
 
- exports.findAll = async () => {
-  return await Repository.findAll()
+ exports.listAllProducts = async () => {
+  return await ProductRepository.findAll()
  }
 
- exports.create = async (product) => {
-   return await Repository.create(product)
+ exports.insertProduct = async (product) => {
+   return await ProductRepository.create(product)
  }

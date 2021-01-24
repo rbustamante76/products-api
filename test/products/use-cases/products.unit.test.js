@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
-const Repository = require('../../../src/products/infrastructure/Repository')
+const ProductRepository = require('../../../src/products/infrastructure/ProductRepository')
 const ProductUseCases = require('../../../src/products/use-cases/product')
 const sinon = require('sinon')
 
@@ -35,8 +35,8 @@ describe('Test products by id use cases', () => {
       price: 20000
     }
 
-    sinon.stub(Repository, 'findById').returns(expected)
-    const result = await ProductUseCases.findById('4')
+    sinon.stub(ProductRepository, 'findById').returns(expected)
+    const result = await ProductUseCases.searchProductById('4')
 
     expect(result).toEqual(expected)
 
@@ -44,8 +44,8 @@ describe('Test products by id use cases', () => {
 
   test('should return undefined when product not exist', async()  => {
 
-    sinon.stub(Repository, 'findById').returns(null)
-    const result = await ProductUseCases.findById('1000')
+    sinon.stub(ProductRepository, 'findById').returns(null)
+    const result = await ProductUseCases.searchProductById('1000')
 
     expect(result).toEqual(null)
 
@@ -53,7 +53,7 @@ describe('Test products by id use cases', () => {
 
  test('should return udefined when id is invalid', async()  => {
 
-   await expect(ProductUseCases.findById('x')).rejects.toThrow()
+   await expect(ProductUseCases.searchProductById('x')).rejects.toThrow()
 
   })
 
@@ -84,8 +84,8 @@ describe('Test products by brand use cases', () => {
    }
    ]
 
-    sinon.stub(Repository, 'findByBrand').returns(expected)
-    const result = await ProductUseCases.findByBrand('Marca')
+    sinon.stub(ProductRepository, 'findByBrand').returns(expected)
+    const result = await ProductUseCases.searchProductsByBrand('Marca')
 
     expect(result).toEqual(expected)
 
@@ -93,8 +93,8 @@ describe('Test products by brand use cases', () => {
 
   test('should return empty when neithert product contains brand', async()  => {
 
-    sinon.stub(Repository, 'findByBrand').returns([])
-    const result = await ProductUseCases.findByBrand('xxx')
+    sinon.stub(ProductRepository, 'findByBrand').returns([])
+    const result = await ProductUseCases.searchProductsByBrand('xxx')
 
     expect(result).toEqual([])
 
@@ -119,8 +119,8 @@ describe('Test products by description use cases', () => {
     }
    ]
 
-    sinon.stub(Repository, 'findByDescription').returns(expected)
-    const result = await ProductUseCases.findByDescription('Refri')
+    sinon.stub(ProductRepository, 'findByDescription').returns(expected)
+    const result = await ProductUseCases.searchProductsByDescription('Refri')
 
     expect(result).toEqual(expected)
 
@@ -128,8 +128,8 @@ describe('Test products by description use cases', () => {
 
   test('should return null when neithert product contains description', async()  => {
 
-    sinon.stub(Repository, 'findByDescription').returns([])
-    const result = await ProductUseCases.findByDescription('xxx')
+    sinon.stub(ProductRepository, 'findByDescription').returns([])
+    const result = await ProductUseCases.searchProductsByDescription('xxx')
 
     expect(result).toEqual([])
 
@@ -162,8 +162,8 @@ describe('Test get products use cases', () => {
    }
    ]
 
-    sinon.stub(Repository, 'findAll').returns(expected)
-    const result = await ProductUseCases.findAll()
+    sinon.stub(ProductRepository, 'findAll').returns(expected)
+    const result = await ProductUseCases.listAllProducts()
 
     expect(result).toEqual(expected)
 

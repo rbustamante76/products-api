@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
-const Repository = require('../../../src/products/infrastructure/Repository')
+const ProductRepository = require('../../../src/products/infrastructure/ProductRepository')
 const ProductModel  = require('../../../src/products/entities/product.model');
 const sinon = require('sinon')
 
@@ -36,7 +36,7 @@ describe('Test products by id repository', () => {
     }
 
     sinon.stub(ProductModel, 'findOne').returns(expected)
-    const result = await Repository.findById('4')
+    const result = await ProductRepository.findById('4')
 
     expect(result).toEqual(expected)
 
@@ -45,14 +45,14 @@ describe('Test products by id repository', () => {
   test('should return undefined when product not exist', async()  => {
 
     sinon.stub(ProductModel, 'findOne').returns(null)
-    const result = await Repository.findById('1000')
+    const result = await ProductRepository.findById('1000')
 
     expect(result).toEqual(null)
 
   })
 
  test('should return error when id is invalid', async()  => {
-   await expect(Repository.findById('x')).rejects.toThrow()
+   await expect(ProductRepository.findById('x')).rejects.toThrow()
 
   })
 
@@ -84,7 +84,7 @@ describe('Test products by brand repository', () => {
    ]
 
     sinon.stub(ProductModel, 'find').returns(expected)
-    const result = await Repository.findByBrand('Marca')
+    const result = await ProductRepository.findByBrand('Marca')
 
     expect(result).toEqual(expected)
 
@@ -93,7 +93,7 @@ describe('Test products by brand repository', () => {
   test('should return null when neither product contains a brand', async()  => {
 
     sinon.stub(ProductModel, 'find').returns([])
-    const result = await Repository.findByBrand('xxx')
+    const result = await ProductRepository.findByBrand('xxx')
 
     expect(result).toEqual([])
 
@@ -128,7 +128,7 @@ describe('Test products by description repository', () => {
         ]
 
         sinon.stub(ProductModel, 'find').returns(expected)
-        const result = await Repository.findByDescription('Marca')
+        const result = await ProductRepository.findByDescription('Marca')
 
         expect(result).toEqual(expected)
 
@@ -137,7 +137,7 @@ describe('Test products by description repository', () => {
     test('should return null when neither product contains a description', async()  => {
 
         sinon.stub(ProductModel, 'find').returns([])
-        const result = await Repository.findByDescription('xxx')
+        const result = await ProductRepository.findByDescription('xxx')
 
         expect(result).toEqual([])
 
@@ -171,7 +171,7 @@ describe('Test get all products repository', () => {
    ]
 
     sinon.stub(ProductModel, 'find').returns(expected)
-    const result = await Repository.findAll('Marca')
+    const result = await ProductRepository.findAll('Marca')
 
     expect(result).toEqual(expected)
 

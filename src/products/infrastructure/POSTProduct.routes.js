@@ -1,5 +1,5 @@
 const ProductUseCases = require('../use-cases/product');
-const {validateQuery} = require('../adapters/POSTProduct.validators')
+const {validateQuery} = require('../validators/POSTProduct.validators')
 const HTTPCodes = require('http-status-codes');
 
 const PostProduct = {
@@ -18,7 +18,7 @@ async function action(ctx) {
       return;
     }
 
-    const response = await ProductUseCases.create(requestBody) 
+    const response = await ProductUseCases.insertProduct(requestBody) 
     setHttpResponse(ctx, response, HTTPCodes.OK);
   
       }catch(error){

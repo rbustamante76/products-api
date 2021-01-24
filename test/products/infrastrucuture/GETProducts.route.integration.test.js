@@ -28,7 +28,7 @@ describe('routes:  get products', () => {
       price: 30000
     }]
 
-    sinon.stub(ProductUseCases, 'findAll').returns(mockResult)
+    sinon.stub(ProductUseCases, 'listAllProducts').returns(mockResult)
 
     const response = await request(app.callback()).get('/products')
 

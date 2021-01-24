@@ -1,5 +1,5 @@
 const ProductUseCases = require('../use-cases/product');
-const { validateQuery } = require('../adapters/GETProductsByDescription.validators')
+const { validateQuery } = require('../validators/GETProductsByDescription.validators')
 const HTTPCodes = require('http-status-codes');
 
 const GetProductsByBrand = {
@@ -18,7 +18,7 @@ async function action(ctx) {
       return;
     }
 
-    const response = await ProductUseCases.findByDescription(description) 
+    const response = await ProductUseCases.searchProductsByDescription(description) 
     setHttpResponse(ctx, response, HTTPCodes.OK);
   
       }catch(error){

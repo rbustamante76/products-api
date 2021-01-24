@@ -29,7 +29,7 @@ describe('routes:  get products by brand', () => {
   }
   ]
 
-   sinon.stub(ProductUseCases, 'findByBrand').returns(mockResult)
+   sinon.stub(ProductUseCases, 'searchProductsByBrand').returns(mockResult)
 
    const response = await request(app.callback()).get('/products/brand/Marca')
 
@@ -40,7 +40,7 @@ describe('routes:  get products by brand', () => {
 
  test('should respond not found get product by brand ', async () => {
 
-     sinon.stub(ProductUseCases, 'findByBrand').returns([])
+     sinon.stub(ProductUseCases, 'searchProductsByBrand').returns([])
 
      const response = await request(app.callback()).get('/products/brand/xxx')
 

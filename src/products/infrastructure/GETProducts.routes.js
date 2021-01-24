@@ -9,7 +9,7 @@ const GetProducts = {
 
 async function action(ctx) {
   try {
-    const response = await ProductUseCases.findAll()
+    const response = await ProductUseCases.listAllProducts()
 
     setHttpResponse(ctx, response, HTTPCodes.OK)
       }catch(error){
